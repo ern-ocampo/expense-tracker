@@ -1,0 +1,67 @@
+<!-- The #expense is used to access the value of each input field -->
+<div class="container">
+    <h3>Add A New Item:</h3>
+    <form action="">
+        <div class="form-group">
+            <label for="types">Type</label>
+            <select class="form-control" name="types" id="types"
+                    [(ngModel)]="defaultData.type" #expenseType>
+                <option value="cash">Cash</option>
+                <option value="credit">Credit</option>
+                <option value="debit">Debit</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" id="name" 
+                    placeholder="Input the Expense Name" 
+                    [(ngModel)]="defaultData.name" #expenseName>
+        </div>
+    
+        <div class="form-group">
+            <label for="expenseDate">Date</label>
+            <input type="date" class="form-control" name="expenseDate" id="expenseDate" [(ngModel)]="defaultData.date" #expenseDate>
+        </div>
+    
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" name="amount" id="amount" placeholder="Input the Amount" 
+            [(ngModel)]="defaultData.amount" #expenseAmount>
+        </div>
+
+        <!-- To add data on the table and using the .value to get the value of each input field -->
+        <button class="btn btn-primary" id="addBtn"
+            (click)="addExpense(expenseType.value, expenseName.value, expenseDate.value, expenseAmount.valueAsNumber)">
+                Add Expense
+        </button>
+
+    </form>
+
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- To display all contents of the expenseList Array -->
+            <!-- The indexCtr is used to get the index of each element -->
+            <tr *ngFor="let expense of expenseList; let indexCtr=index"
+                class="">
+                <td> {{ expense.type | titlecase }} </td>
+                <td> {{ expense.name | titlecase }} </td>
+                <td> {{ expense.date | date:"mediumDate" }} </td>
+                <td> {{ expense.amount | currency:'PHP' }} </td>
+                <td> 
+                    <!-- Using the removeExpense function using the indexCtr as the paramater -->
+                    <button class="btn btn-secondary" style="background-color: red;" (click)="removeExpense(indexCtr)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

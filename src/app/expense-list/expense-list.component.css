@@ -1,0 +1,12 @@
+label {
+    font-weight: bold;
+}
+
+#addBtn {
+    margin-top: 10px;
+    background-color: darkgreen;
+}
+
+table {
+    margin-top: 10px;
+}
